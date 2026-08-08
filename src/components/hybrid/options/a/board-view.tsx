@@ -427,8 +427,8 @@ function buildTaskActions(
       onSelect: () => { if (!ro) store.duplicateTask(task.id); },
     },
     // Nudge is a reminder about this task, sent to its owner. The dialog is
-    // complete; sending stays disabled until the Nudge backend exists
-    // (docs/founder-todos.md item 3) — the surface must not promise delivery.
+    // complete; connecting it to the shipped backend is the remaining seam
+    // (docs/engineering-followups.md item 3). Live delivery stays out of tests.
     {
       id: "nudge",
       label: "Nudge…",
@@ -1946,9 +1946,8 @@ function ConfirmTaskDelete({
 
 /**
  * A reminder about this task for its owner. The dialog is complete; the
- * send stays disabled until the Nudge backend exists (persistence,
- * permissions, recipient resolution, delivery — docs/founder-todos.md
- * item 3). Do NOT wire a send here before that ships.
+ * shared Nudge backend has shipped. Connecting this board surface is tracked
+ * in docs/engineering-followups.md item 3. Live delivery stays out of tests.
  */
 function NudgeDialog({ task, onClose }: { task: LabTask; onClose: () => void }) {
   const ref = useRef<HTMLDivElement | null>(null);
